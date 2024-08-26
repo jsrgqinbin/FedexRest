@@ -12,7 +12,7 @@ class PackageSpecialServicesRequested
     public ?DangerousGoodsDetail $dangerousGoodsDetail;
     public ?Weight $dryIceWeight;
 
-    public ?SignatureOptionType $signatureOptionType;
+    public $signatureOptionType;
     public ?PackageSpecialServiceType $dangerousGoods;
 
     /**
@@ -66,10 +66,10 @@ class PackageSpecialServicesRequested
     }
 
     /**
-     * @param ?PackageSpecialServiceType $signatureOptionType
+     * @param ?string $signatureOptionType
      * @return $this
      */
-    public function setSignatureOptionType(?PackageSpecialServiceType $signatureOptionType): PackageSpecialServicesRequested {
+    public function setSignatureOptionType(?string $signatureOptionType): PackageSpecialServicesRequested {
         $this->signatureOptionType = $signatureOptionType;
         return $this;
 
