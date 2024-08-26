@@ -66,10 +66,10 @@ class PackageSpecialServicesRequested
     }
 
     /**
-     * @param ?string $signatureOptionType
+     * @param $signatureOptionType
      * @return $this
      */
-    public function setSignatureOptionType(?string $signatureOptionType): PackageSpecialServicesRequested {
+    public function setSignatureOptionType($signatureOptionType): PackageSpecialServicesRequested {
         $this->signatureOptionType = $signatureOptionType;
         return $this;
 
