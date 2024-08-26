@@ -3,6 +3,7 @@
 namespace FedexRest\Entity;
 
 use FedexRest\Services\Ship\Type\PackageSpecialServiceType;
+use FedexRest\Services\Ship\Type\SignatureOptionType;
 
 class PackageSpecialServicesRequested
 {
@@ -10,7 +11,8 @@ class PackageSpecialServicesRequested
     public array $specialServiceTypes;
     public ?DangerousGoodsDetail $dangerousGoodsDetail;
     public ?Weight $dryIceWeight;
-    public ?$signatureOptionType;
+
+    public ?SignatureOptionType $signatureOptionType;
     public ?PackageSpecialServiceType $dangerousGoods;
 
     /**
