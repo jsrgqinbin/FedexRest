@@ -3,7 +3,6 @@
 namespace FedexRest\Entity;
 
 use FedexRest\Services\Ship\Type\PackageSpecialServiceType;
-use FedexRest\Services\Ship\Type\SignatureOptionType;
 
 class PackageSpecialServicesRequested
 {
@@ -46,7 +45,7 @@ class PackageSpecialServicesRequested
     }
 
     /**
-     * @param ?DangerousGoods $dangerousGoods
+     * @param ?DangerousGoods  $dangerousGoods
      * @return $this
      */
     public function setDangerousGoods(?PackageSpecialServiceType $dangerousGoods): PackageSpecialServicesRequested
@@ -69,7 +68,8 @@ class PackageSpecialServicesRequested
      * @param $signatureOptionType
      * @return $this
      */
-    public function setSignatureOptionType($signatureOptionType): PackageSpecialServicesRequested {
+    public function setSignatureOptionType($signatureOptionType): PackageSpecialServicesRequested
+    {
         $this->signatureOptionType = $signatureOptionType;
         return $this;
 
