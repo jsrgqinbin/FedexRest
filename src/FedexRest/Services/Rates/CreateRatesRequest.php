@@ -12,6 +12,8 @@ use FedexRest\Services\AbstractRequest;
 use FedexRest\Services\Ship\Entity\Label;
 use FedexRest\Services\Ship\Entity\ShipmentSpecialServices;
 use FedexRest\Services\Ship\Entity\ShippingChargesPayment;
+use FedexRest\Services\Ship\Entity\SmartPostInfoDetail;
+use FedexRest\Services\Ship\Entity\CustomsClearanceDetail;
 use GuzzleHttp\Exception\GuzzleException;
 
 class CreateRatesRequest extends AbstractRequest
@@ -24,10 +26,12 @@ class CreateRatesRequest extends AbstractRequest
     protected array $rateRequestTypes;
     protected string $packagingType = '';
     protected string $pickupType = '';
+    protected ?SmartPostInfoDetail $smart_post;
     protected int $accountNumber;
     protected array $lineItems = [];
     protected ShipmentSpecialServices $shipmentSpecialServices;
     protected ShippingChargesPayment $shippingChargesPayment;
+    protected ?CustomsClearanceDetail $customsClearanceDetail;
     protected int $totalWeight;
     protected string $preferredCurrency = '';
     protected int $totalPackageCount;
@@ -155,6 +159,15 @@ class CreateRatesRequest extends AbstractRequest
     }
 
     /**
+     * @param SmartPostInfoDetail $SmartPostInfoDetail
+     * @return $this
+     */
+    public function setSmartPost(SmartPostInfoDetail $smartPost): CreateRatesRequest {
+        $this->smart_post = $smartPost;
+        return $this;
+    }
+
+    /**
      * @param int $accountNumber
      * @return $this
      */
@@ -228,6 +241,15 @@ class CreateRatesRequest extends AbstractRequest
     public function getShippingChargesPayment(): ShippingChargesPayment
     {
         return $this->shippingChargesPayment;
+    }
+
+    /**
+     * @param CustomsClearanceDetail $customsClearanceDetail
+     * @return $this
+     */
+    public function setCustomsClearanceDetail(CustomsClearanceDetail $customsClearanceDetail) {
+        $this->customsClearanceDetail = $customsClearanceDetail;
+        return $this;
     }
 
     /**
@@ -306,24 +328,24 @@ class CreateRatesRequest extends AbstractRequest
         return $this->servicesNeededOnRateFailure;
     }
 
-    public function setVariableOptions(?string $variableOptions): CreateRatesRequest
+    public function setVariableOptions(string $variableOptions): CreateRatesRequest
     {
         $this->variableOptions = $variableOptions;
         return $this;
     }
 
-    public function getVariableOptions(): ?string
+    public function getVariableOptions(): string
     {
         return $this->variableOptions;
     }
 
-    public function setRateSortOrder(?string $rateSortOrder): CreateRatesRequest
+    public function setRateSortOrder(string $rateSortOrder): CreateRatesRequest
     {
         $this->rateSortOrder = $rateSortOrder;
         return $this;
     }
 
-    public function getRateSortOrder(): ?string
+    public function getRateSortOrder(): string
     {
         return $this->rateSortOrder;
     }
@@ -354,6 +376,7 @@ class CreateRatesRequest extends AbstractRequest
         $data = [
             'returnTransitTimes' => $this->returnTransitTimes,
             'servicesNeededOnRateFailure' => $this->servicesNeededOnRateFailure,
+            'smartPostInfoDetail' => $this->smart_post,
         ];
 
         if ($this->variableOptions) {
@@ -387,6 +410,10 @@ class CreateRatesRequest extends AbstractRequest
 
         if (!empty($this->shipmentSpecialServices)) {
             $data['shipmentSpecialServices'] = $this->shipmentSpecialServices->prepare();
+        }
+
+        if (!empty($this->customsClearanceDetail)) {
+            $data['customsClearanceDetail'] = $this->customsClearanceDetail->prepare();
         }
 
         if (!empty($this->serviceType)) {
