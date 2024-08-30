@@ -10,6 +10,7 @@ class Person
     public string $personName = '';
     public string $phoneNumber;
     public string $companyName = '';
+    public string $phoneExtension = '';
 
     /**
      * @param  mixed  $address
@@ -53,6 +54,16 @@ class Person
     }
 
     /**
+     * @param  string  $phoneExtension
+     * @return $this
+     */
+    public function setPhoneExtension(string $phoneExtension)
+    {
+        $this->phoneExtension = $phoneExtension;
+        return $this;
+    }
+
+    /**
      * @return array[]
      */
     public function prepare(): array
@@ -67,6 +78,11 @@ class Person
         if (!empty($this->companyName)) {
             $data['contact']['companyName'] = $this->companyName;
         }
+
+        if (!empty($this->phoneExtension)) {
+            $data['contact']['phoneExtension'] = $this->phoneExtension;
+        }
+
 
         if ($this->address != null) {
             $data['address'] = $this->address->prepare();
