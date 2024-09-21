@@ -34,9 +34,10 @@ class ShippingChargesPayment
             $data['paymentType'] = $this->paymentType;
         }
         if (!empty($this->accountNumber)) {
-            $data['payor'] = [
-                'responsibleParty' => ['accountNumber' => $this->accountNumber],
-            ];
+            $data['payor'] = $data['payor'] ?? [];
+            $data['payor']['responsibleParty'] = $data['payor']['responsibleParty'] ?? [];
+            $data['payor']['responsibleParty']['accountNumber'] = $data['payor']['responsibleParty']['accountNumber'] ?? [];
+            $data['payor']['responsibleParty']['accountNumber']['value'] = $this->accountNumber ?? '';
         }
         return $data;
     }
