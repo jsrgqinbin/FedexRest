@@ -376,7 +376,6 @@ class CreateRatesRequest extends AbstractRequest
         $data = [
             'returnTransitTimes' => $this->returnTransitTimes,
             'servicesNeededOnRateFailure' => $this->servicesNeededOnRateFailure,
-            'smartPostInfoDetail' => $this->smart_post,
         ];
 
         if ($this->variableOptions) {
@@ -442,6 +441,10 @@ class CreateRatesRequest extends AbstractRequest
 
         if (!empty($this->totalPackageCount)) {
             $data['totalPackageCount'] = $this->totalPackageCount;
+        }
+
+        if (!empty($this->smart_post)) {
+            $data["smartPostInfoDetail"] = $this->smart_post;
         }
 
         return $data;
