@@ -109,6 +109,26 @@ class Item
         return $this;
     }
 
+  /**
+   * @param  CustomerReference[]  $customerReferences
+   * @return Item
+   */
+  public function setCustomerReferences(array $customerReferences): Item
+  {
+      $this->customerReferences = $customerReferences;
+      return $this;
+  }
+
+  /**
+   * @param  CustomerReference  $customerReference
+   * @return Item
+   */
+  public function addCustomerReference(CustomerReference $customerReference): Item
+  {
+      $this->customerReferences[] = $customerReference;
+      return $this;
+  }
+
     public function prepare(): array
     {
         $data = [];
@@ -146,11 +166,11 @@ class Item
         }
 
         if (!empty($this->customerReferences)) {
-            // Call `prepare()` on each element
-            $data['customerReferences'] = array_map(
-                fn(CustomerReference $custref): array => $custref->prepare(),
-                $this->customerReferences
-            );
+            $customerReferences = [];
+            foreach ($this->customerReferences as $customerReference) {
+                $customerReferences[] = $customerReference->prepare();
+            }
+            $data['customerReferences'] = $customerReferences;
         }
 
         return $data;

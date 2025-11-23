@@ -4,26 +4,22 @@ namespace FedexRest\Entity;
 
 class CustomerReference
 {
-    public function __construct(
-        public ?string $type = null, // One of the Type\CustomerReferenceType constants
-        public string $value = '',
-    ) {
-    }
+    public string $type;
+    public string $value;
 
-    public function setType(?string $type): static
+    public function setType(string $type): CustomerReference
     {
         $this->type = $type;
         return $this;
     }
 
-    public function setValue(string $value): static
+    public function setValue(string $value): CustomerReference
     {
         $this->value = $value;
         return $this;
     }
 
-    public function prepare(): array
-    {
+    public function prepare(): array {
         $data = [];
         if (!empty($this->type)) {
             $data['customerReferenceType'] = $this->type;
