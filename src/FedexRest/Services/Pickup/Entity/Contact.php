@@ -6,8 +6,8 @@ use FedexRest\Entity\Person;
 
 class Contact extends Person
 {
-    protected ?string $phoneExtension = null;
-
+    public string $phoneExtension = "";
+    
     /**
      * @return string|null
      */
