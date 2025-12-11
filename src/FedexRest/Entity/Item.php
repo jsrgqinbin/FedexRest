@@ -109,25 +109,6 @@ class Item
         return $this;
     }
 
-  /**
-   * @param  CustomerReference[]  $customerReferences
-   * @return Item
-   */
-  public function setCustomerReferences(array $customerReferences): Item
-  {
-      $this->customerReferences = $customerReferences;
-      return $this;
-  }
-
-  /**
-   * @param  CustomerReference  $customerReference
-   * @return Item
-   */
-  public function addCustomerReference(CustomerReference $customerReference): Item
-  {
-      $this->customerReferences[] = $customerReference;
-      return $this;
-  }
 
     public function prepare(): array
     {
